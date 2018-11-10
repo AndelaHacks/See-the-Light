@@ -13,8 +13,7 @@ The Project consists of a machine learning model that is the backend of our proj
 The output displays a percentage confidence of real or fake, similarity of text to title, and polarity of the text.
 
 ## IP address/Domain reputation checker
-The service checks if the domain / IP Address is in any blacklist and also compares the historical information of the IP address.
-These three checks -IP address blacklist, Domain blacklist and IP address historical blacklist- are summarized and returned as a global score for the IP address.
+The STL API queries the Tallos Intelligence Resources and the Public API for Apility.io for much of the analytics in regards to IP and Domain Checker. These three checks -IP address blacklist, Domain blacklist and IP address historical blacklist- are summarized and returned as a global score for the IP address.
 
 This API call also returns detailed information about the IP address from different sources:
 - when the domain was registered and the registrar
