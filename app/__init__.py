@@ -6,7 +6,7 @@ from app.api.views.news import news
 
 
 app = Flask(__name__)
-app.register_blueprint(news, url_prefix='/see-the-light')
+app.register_blueprint(news, url_prefix='/news')
 # app.register_blueprint(news, url_prefix='/')
 # app.register_blueprint(news, url_prefix='/news')
 # app.register_blueprint(products, url_prefix='/api/v1')
