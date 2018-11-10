@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:padding="8dp"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    >
 
     <TextView
         android:layout_width="wrap_content"
@@ -24,23 +25,22 @@
         android:id="@+id/simpleProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="190dp"
+        android:layout_marginStart="142dp"
+        android:layout_marginTop="204dp"
         android:visibility="invisible" />
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="300dp"
-        android:layout_height="250dp"
+        android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginTop="88dp"
-        android:hint="Paste url of political news to check credibility"
-        android:inputType="textMultiLine"
-        />
-
+        android:hint="Paste any news complete url to check credibility"
+        android:inputType="textMultiLine" />
 
 
     <Button
@@ -49,8 +49,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="53dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="239dp"
         android:text="Confirm" />
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginBottom="29dp" />
 
 </RelativeLayout>
