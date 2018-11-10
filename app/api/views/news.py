@@ -1,6 +1,7 @@
 from flask import Flask, Blueprint, jsonify, request
 from app.api.models import news_model
 import json
+import socket
 import requests
 # from app import app
 # from app.api.v1.models.news_model import Sale
@@ -29,6 +30,32 @@ def post_news_link():
         )
     print("###########", response.content)
     return (response.content)
+
+@news.route('/url', methods = ['GET'])
+def post_url_link():
+    link = request.args.get('link')
+    get_url = (link.split('/'))[2]
+    IP_addr = socket.gethostbyname(get_url)
+    Token_Charles = '52a90970-cfa0-4536-91e5-f7148bb25c61'
+    Token_Simon = '6ca9c9de-3b1e-4300-b85b-6501bf44717a'
+
+    headers = {
+    "Accept": "application/json",
+    "X-Auth-Token": Token_Simon,
+    }
+
+    fullip = requests.get('https://api.apility.net/v2.0/' +
+                        IP_addr, headers=headers)
+    print(fullip)
+
+    return fullip.content
+
+    
+    # print('######## THIS IS THE LINK FROM GET METHOD', link)
+    # response = requests.get('https://api.apility.net/v2.0/' + IP_addr, headers=headers)
+    # print("###########", response.content)
+    # return (response.content)
+
 
     # return "This is a project by team STL"
 
