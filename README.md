@@ -28,6 +28,8 @@ This API call also returns detailed information about the IP address from differ
 The project does not require a user to download any machine learning library but only download the apk of the application from this site https://drive.google.com/file/d/1nAvX97uhTnjMkT_q4RkZ4-tbi_gMBIsv/view?usp=sharing.
 After installing the android application, the user will be able to paste the urls into the application and it is parsed in the API of the machine Learning model
 
+![alt text](https://github.com/AndelaHacks/see-the-light/blob/develop/photos/WhatsApp%20Image%202018-11-10%20at%2011.46.47%20AM.jpeg)
+
 ## Web Plugin 
 It works on the same procedure as the android app but by having a Web Extension being installed in the browser which extacts the webpage being browsed and parses the data using the Machine Learning model API.
 
