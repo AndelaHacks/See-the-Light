@@ -38,5 +38,4 @@ The See The Light API uses part of the Machine Learning Model developed by [@bmb
 
 ## API Endpoints
 The API endpoint to check the authenticity of a news article is:
-
-
+https://see-the-light.herokuapp.com/news/get?link=https://your-story-link-to-verify.com
