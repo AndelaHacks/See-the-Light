@@ -31,6 +31,7 @@ def post_news():
     # quantity_sold = req_data['quantity_sold']
     # amount = req_data['amount']
     link = req_data['link']
+    print("####### THE LINK PROVIDED IS ###########", link)
     # response = app.test_client.post('/api/v1/products')
 
 
@@ -49,9 +50,12 @@ def post_news():
     #     return 'the sale transaction did not go through, possible invalid request', 400
 
     response = requests.post('http://newsbreakers.herokuapp.com',
-        data= {"text":"https://www.bbc.com/news/uk-politics-46155403"}
+        data= {"text":link}
             # content_type='application/json'
         )
+
+        # name = TextField('Name:', validators=[validators.required()])
+        # form = ReusableForm(request.form)
 
     # response = app.test_client().post(
     #     'newsbreakers.herokuapp.com/',
