@@ -86,13 +86,3 @@ print(fullip)
         "whois": {...}
     }
 
-# key_pass = 'Mwangi2018'
-
-# GET /badip_batch/IP_addr HTTP/1.1
-# Host: api.apility.net
-# X-Auth-Token: 52a90970-cfa0-4536-91e5-f7148bb25c61
-# Cache-Control: no-cache
-# Postman-Token: 77a94897-edff-f7bc-7b48-6874d8a37340
-
-
-#$ curl -H "Accept: application/json" -H "X-Auth-Token: 52a90970-cfa0-4536-91e5-f7148bb25c61" -X GET "https://api.apility.net/badip_batch/172.217.6.193"
