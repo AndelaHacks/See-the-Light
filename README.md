@@ -32,6 +32,10 @@ After installing the android application, the user will be able to paste the url
 ## Web Plugin 
 It works on the same procedure as the android app but by having a Web Extension being installed in the browser which extacts the webpage being browsed and parses the data using the Machine Learning model API.
 
+## Machine Learning Model
+The See The Light API uses part of the Machine Learning Model developed by [@bmbejcek](https://github.com/bmbejcek). The See The Light app goes ahead and adds dns credibility assessment to check on the source of the story. If such a site is associated with fake news, then it reduces the credibility of such a site.
 
+## API Endpoints
+The API endpoint to check the authenticity of a news article is:
 
 
