@@ -1,0 +1,9 @@
+import whois
+
+url = 'https://nation.co.ke/bla/bla/some-other-link.html'
+
+
+get_url = url.split('/')[2]
+
+w = whois.whois(url)
+print (w)
