@@ -1,9 +1,10 @@
 import whois
 
+# The function handling IP address analytics is expecting just the domain name without
+# the https:// and trailing .xxxxx after that, lets strip that from our uniform 'link' variable and return
+# only whats needed - this code is now useless, has been merged directly on the view
+
 url = 'https://nation.co.ke/bla/bla/some-other-link.html'
 
 
 get_url = url.split('/')[2]
-
-w = whois.whois(url)
-print (w)
