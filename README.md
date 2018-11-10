@@ -1,10 +1,10 @@
 # TEAM SeeTheLight(STL) - ANDELA NEWS HACKATHON
 
 ## Contributors
-[Simon Injiri](https://www.github.com/simoninjiri)<br>
+[Simon Injiri](https://www.github.com/injiri)<br>
 [Brian Wandera](https://www.github.com/wandesky)<br>
 [Charles Njenga](https://www.github.com/Hackitect)<br>
-[Catherine Wanjiru](https://www.github.com/Hackitect)<br>
+[Catherine Wanjiru](https://www.github.com/kateshiru)<br>
 
 
 
@@ -30,7 +30,7 @@ The project does not require a user to download any machine learning library but
 After installing the android application, the user will be able to paste the urls into the application and it is parsed in the API of the machine Learning model
 
 ## Web Plugin 
-It works on the same procedure as the android app but by having a Web Extension being installed in the browser which extacts the webpage being browsed and ranks the site using machine learning model.
+It works on the same procedure as the android app but by having a Web Extension being installed in the browser which extacts the webpage being browsed and parses the data using the Machine Learning model API.
 
 
 
