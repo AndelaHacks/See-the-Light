@@ -1,3 +1,4 @@
+
 # TEAM SeeTheLight(STL) - ANDELA NEWS HACKATHON
 
 ## Contributors
@@ -39,3 +40,4 @@ The See The Light API uses part of the Machine Learning Model developed by [@bmb
 ## API Endpoints
 The API endpoint to check the authenticity of a news article is:
 [Click Here To View A Demo of the API](https://see-the-light.herokuapp.com/news/get?link=https://stackoverflow.com/questions/24892035/python-flask-how-to-get-parameters-from-a-url)
+
