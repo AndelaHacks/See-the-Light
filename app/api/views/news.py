@@ -67,4 +67,4 @@ def post_news():
     #         content_type='application/json'
     #     )
     print("###########", response.content)
-    return ("Done", response.status_code)
+    return (response.content)
