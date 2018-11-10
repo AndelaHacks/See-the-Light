@@ -1,25 +1,7 @@
 import socket
 import requests
 
-"""
-https://apility.io/apidocs/#get-full-ip-address-reputation-info
 
-From API version 2.0 a new endpoint has been added that allows to obtain a score of an IP address not only studying if it is in a black list. Also the following checks are made:
-
-A reverse DNS lookup is performed and a hostname is obtained. The service checks if the domain is in any blacklist.
-Check if the IP address was in any blacklist in the past. The service checks the historical information of the IP address.
-These three checks -IP address blacklist, Domain blacklist and IP address historical blacklist- are summarized and returned as a global score for the IP address.
-
-This API call also returns detailed information about the IP address from different sources:
-
-IP Geolocation
-AS information
-WHOIS informaton
-Reverse DNS lookup to obtain the Hostname
-Blacklists where the IP address was found (if any).
-Blacklists where the Hostname was found (if any).
-IP address historical activity: what blacklists did the IP address was found in?
-"""
 # Remove the below line when finally intergrated with main app
 link = "https://www.du30newsblog.blogspot.com"
 
