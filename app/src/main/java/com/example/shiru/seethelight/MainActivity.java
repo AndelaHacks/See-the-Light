@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
                 ClipData clipData = clipboardManager.getPrimaryClip();
                 ClipData.Item item = clipData.getItemAt(0);
-git
+
                 myWebView.loadUrl("https://see-the-light.herokuapp.com/news/get?link="+ item.getText().toString());
 
                 // txttext.setText(item.getText().toString());
