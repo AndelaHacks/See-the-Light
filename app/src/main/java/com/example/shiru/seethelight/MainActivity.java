@@ -1,101 +1,88 @@
 package com.example.shiru.seethelight;
 
-import android.content.Intent;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
-import java.net.URL;
+import com.example.shiru.seethelight.R;
+
+import static android.content.Context.CLIPBOARD_SERVICE;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText etName ;
-
+    Button btn_copy,btn_paste;
+    TextView txttext;
+    TextView ettext;
+    ClipboardManager clipboardManager;
     WebView myWebView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        etName = findViewById(R.id.editText);
+        //btn_copy = findViewById(R.id.btn_copy);
+        btn_paste = findViewById(R.id.btn_paste);
+        txttext = findViewById(R.id.textDisplay);
+        ettext = findViewById(R.id.textWrite);
+        myWebView = findViewById(R.id.mywebview);
 
-         myWebView = (WebView) findViewById(R.id.webview);
+        clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
 
-        // initiate progress bar and start button
-        final ProgressBar simpleProgressBar = (ProgressBar) findViewById(R.id.simpleProgressBar);
-        Button startButton = (Button) findViewById(R.id.startButton);
+        if(!clipboardManager.hasPrimaryClip())
+        {
+            btn_paste.setEnabled(false);
 
-        // perform click event on button
-        startButton.setOnClickListener(new View.OnClickListener() {
+        }
+
+     /*   btn_copy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                String text = ettext.getText().toString();
 
-                // visible the progress bar
-                simpleProgressBar.setVisibility(View.VISIBLE);
+                if(!text.equals( ""))
+                {
+                   // ClipData clipData = ClipData.newPlainText("text", text);
+                    //clipboardManager.setPrimaryClip(clipData);
 
 
-                myWebView.loadUrl("https://see-the-light.herokuapp.com/news/get?link="+ etName.getText().toString());
+                    ClipData clipData = ClipData.newPlainText("text", text);
+                    clipboardManager.setPrimaryClip(clipData);
 
 
 
-                /**
 
-                URL url = null;
-                try {
-                    url = new URL("https://see-the-light.herokuapp.com/see-the-light/news");
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this,"Copied",Toast.LENGTH_SHORT ).show();
+                    btn_paste.setEnabled(true);
                 }
-                HttpURLConnection client = null;
-                try {
-                    client = (HttpURLConnection) url.openConnection();
-                    client.setRequestMethod("POST");
-
-                    client.setRequestProperty("link","https://www.wikihow.com/Execute-HTTP-POST-Requests-in-Android");
-                    client.setDoOutput(true);
-
-                 HttpClient client = new DefaultHttpClient();
-
-                 HttpGet request = new HttpGet("https://see-the-light.herokuapp.com/see-the-light/news");
-                 ResponseHandler<String> handler = new BasicResponseHandler();
-                 String response = "";
-                 try {
-                 response = client.execute(request, handler);
-                 } catch (IOException e) {
-                 e.printStackTrace();
-                 }
+            }
+        });*/
 
 
-                 }
-                catch(SocketTimeoutException error) {
-                //Handles URL access timeout.
-                }
-                catch (IOException error) {
-                    //Handles input and output errors
-                }
-                finally {
-                    if(client != null) // Make sure the connection is not null.
-                        client.disconnect();
-                }***/
+        btn_paste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                ClipData clipData = clipboardManager.getPrimaryClip();
+                ClipData.Item item = clipData.getItemAt(0);
+git
+                myWebView.loadUrl("https://see-the-light.herokuapp.com/news/get?link="+ item.getText().toString());
 
+                // txttext.setText(item.getText().toString());
 
-                }
-            });
+                Toast.makeText(MainActivity.this,"Pasted",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 }
