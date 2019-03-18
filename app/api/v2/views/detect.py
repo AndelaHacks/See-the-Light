@@ -1,10 +1,8 @@
 from flask import Blueprint, request, jsonify
 from newspaper import Article
-from requests import get
 from sklearn.externals import joblib
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from fuzzywuzzy import fuzz, process
-import summarizer
 import app.api.v2.views.news_functions as kick
 
 
