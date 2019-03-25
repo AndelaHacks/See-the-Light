@@ -76,7 +76,8 @@ def apility(url_2):
         "Accept" : "application/json",
         "X-Auth-Token": Token_apility
     }
-    #request(method, url, body=None, headers={})
+    # request(method, url, body=None, headers={})
+    # Apility API documentation here https://apility.io/apidocs/
     fullip = request.get ('https://api.apility.net/v2.0/' + IP_addr, headers=headers)
     return fullip.content
 
