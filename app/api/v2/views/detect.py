@@ -4,6 +4,7 @@ from sklearn.externals import joblib
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from fuzzywuzzy import fuzz, process
 import app.api.v2.models.news_functions as kick
+import requests
 
 
 """The Levenshtein Distance
@@ -20,6 +21,8 @@ to calculate the string with the highest similarity out of a vector of strings.
 """
 
 news = Blueprint('news', __name__, url_prefix='/api/v2')
+
+
 
 @news.route('/detect', methods=['POST'])
 def verify():
@@ -57,6 +60,11 @@ def verify():
         prob_out = str(round(prob[0][1]*100, 1))
     return jsonify({"Prediction": pred_out, "percentage of confidence": prob_out, "subjectivity": senti[0], "polarity": senti[1], "Title / Article Comparison": fuzzy})
 
-@news.route('/')
-def hello():
-    return "This is a project by team STL:"
+@news.route('/get', methods=['GET'])
+def post_news_link():
+    # Kate is expecting this format - hence do a get request which will perform post again
+    # link to be ("https://stl-v2.herokuapp.com/api/v2/get?url="+item.getText().toString());
+    link = request.args.get('url')
+    response = requests.post('https://stl-v2.herokuapp.com/api/v2/detect/',
+                                data = {"url": link})
+    return (response.content)
