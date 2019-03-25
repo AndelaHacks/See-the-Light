@@ -1,3 +1,6 @@
+from flask import request
+import socket
+import requests
 from textblob import TextBlob
 from math import fabs
 from re import split as regex_split, sub as regex_sub, UNICODE as REGEX_UNICODE
@@ -73,7 +76,8 @@ def apility(url_2):
         "Accept" : "application/json",
         "X-Auth-Token": Token_apility
     }
-    fullip = requests.get ('https://api.apility.net/v2.0/' + IP_addr, headers=headers)
+    #request(method, url, body=None, headers={})
+    fullip = request.get ('https://api.apility.net/v2.0/' + IP_addr, headers=headers)
     return fullip.content
 
 def summarize(title, text):
