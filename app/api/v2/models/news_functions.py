@@ -1,3 +1,6 @@
+from flask import request
+import socket
+import requests
 from textblob import TextBlob
 from math import fabs
 from re import split as regex_split, sub as regex_sub, UNICODE as REGEX_UNICODE
@@ -63,6 +66,20 @@ stopWords = set([
     "government", "police"
 ])
 ideal = 20.0
+
+def apility(url_2):
+    #return the domain part from news link
+    get_url = (url_2.split('/'))[2]
+    IP_addr = socket.gethostbyname(get_url)
+    Token_apility = '52a90970-cfa0-4536-91e5-f7148bb25c61'
+    headers = {
+        "Accept" : "application/json",
+        "X-Auth-Token": Token_apility
+    }
+    # request(method, url, body=None, headers={})
+    # Apility API documentation here https://apility.io/apidocs/
+    fullip = request.get ('https://api.apility.net/v2.0/' + IP_addr, headers=headers)
+    return fullip.content
 
 def summarize(title, text):
     summaries = []
