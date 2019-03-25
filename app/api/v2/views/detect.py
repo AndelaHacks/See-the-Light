@@ -3,7 +3,7 @@ from newspaper import Article
 from sklearn.externals import joblib
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from fuzzywuzzy import fuzz, process
-import app.api.v2.views.news_functions as kick
+import app.api.v2.models.news_functions as kick
 
 
 """The Levenshtein Distance
