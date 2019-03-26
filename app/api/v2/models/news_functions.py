@@ -69,6 +69,9 @@ ideal = 20.0
 
 def apility(url_2):
     #return the domain part from news link
+    # the check IP address reputation 
+    # 
+
     get_url = (url_2.split('/'))[2]
     IP_addr = socket.gethostbyname(get_url)
     Token_apility = '52a90970-cfa0-4536-91e5-f7148bb25c61'
@@ -77,10 +80,12 @@ def apility(url_2):
         "X-Auth-Token": Token_apility
     }
     # request(method, url, body=None, headers={})
-    # Apility API documentation here https://apility.io/apidocs/
-    fullip = request.get ('https://api.apility.net/v2.0/' + IP_addr, headers=headers)
-    return fullip.content
-
+    # Apility API documentation here https://apility.io/apidocs/#get-full-ip-address-reputation-info
+    # GET https://api.apility.net/v2.0/ip/<IP>
+    ip_reputation = request.get ('https://api.apility.net/v2.0/ip/' + IP_addr, headers=headers)
+    
+    return ip_reputation.content
+    
 def summarize(title, text):
     summaries = []
 

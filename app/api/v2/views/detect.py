@@ -64,7 +64,46 @@ def verify():
 def post_news_link():
     # Kate is expecting this format - hence do a get request which will perform post again
     # link to be ("https://stl-v2.herokuapp.com/api/v2/get?url="+item.getText().toString());
-    link = request.args.get('url')
-    response = requests.post('https://stl-v2.herokuapp.com/api/v2/detect/',
-                                data = {"url": link})
-    return (response.content)
+    url = request.args.get('url')
+
+    # # return jsonify({"The URL you entered is": link})
+    # response = requests.post('http://stl-v2.herokuapp.com/api/v2/detect',
+    #                         data = {"url": link}
+    #                         )
+    # # return (response.content)
+    # # response = requests.post('http://newsbreakers.herokuapp.com',
+    # #                          data={"text": link}
+    # #                          # content_type='application/json'
+    # #                          )
+    # return (response.content)
+    try:
+        a = Article(url)
+        a.download()
+        a.parse()
+    except: #expression as identifier:
+        return jsonify({"An Error has been detected, unable to scrape article text from,": url})
+    TXT = a.text
+    TITLE = a.title
+    use = kick.summarize(TITLE,TXT)
+    # lets compare similarity of the Title to Article
+    fuzzy = str(round((100-fuzz.ratio(TITLE,use))*1.0,1))
+
+    # unpack and deploy trained count vectorizer
+    count_vect = joblib.load('vectorizer.pkl')
+    X_train_counts = count_vect.fit_transform([TXT])
+    tf_transformer = TfidfTransformer()
+    X_train_tfidf = tf_transformer.fit_transform(X_train_counts)
+    
+    # Sentiment analysis is the automated process of 
+    # understanding an opinion about a given subject from written or spoken language
+    senti = kick.sentiment(TXT)
+    #unpack and run trained model
+    clf = joblib.load('stl_news_model.pkl')
+    pred = clf.predict(X_train_tfidf)
+    prob = clf.predict_proba(X_train_tfidf)
+    pred_out = pred[0].decode('utf-8')
+    if prob[0][0] >= .5:
+        prob_out = str(round(prob[0][0]*100, 1))
+    else:
+        prob_out = str(round(prob[0][1]*100, 1))
+    return jsonify({"Prediction": pred_out, "percentage of confidence": prob_out, "subjectivity": senti[0], "polarity": senti[1], "Title / Article Comparison": fuzzy})
