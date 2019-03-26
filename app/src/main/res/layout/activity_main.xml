@@ -12,13 +12,14 @@
 
     <TextView
         android:id="@+id/textWrite"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:textSize="26sp"
         android:ems="10"
         android:text="Click verify to verify the pasted link"
 
@@ -55,6 +56,7 @@
         android:layout_margin="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="18sp"
         android:text="Verified Results appear here"
         />
     <WebView

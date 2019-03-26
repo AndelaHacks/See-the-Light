@@ -75,11 +75,13 @@ public class MainActivity extends AppCompatActivity {
                 ClipData clipData = clipboardManager.getPrimaryClip();
                 ClipData.Item item = clipData.getItemAt(0);
 
-                myWebView.loadUrl("https://see-the-light.herokuapp.com/news/get?link="+ item.getText().toString());
+                //myWebView.loadUrl("https://see-the-light.herokuapp.com/news/get?link="+ item.getText().toString());
+
+                myWebView.loadUrl("https://stl-v2.herokuapp.com/api/v2/get?url+" + item.getText().toString());
 
                 // txttext.setText(item.getText().toString());
 
-                Toast.makeText(MainActivity.this,"Pasted",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"We have accessed your copied link. Kindly give us a moment to run it against our model",Toast.LENGTH_LONG).show();
 
             }
         });
