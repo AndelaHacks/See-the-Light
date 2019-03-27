@@ -23,6 +23,9 @@ to calculate the string with the highest similarity out of a vector of strings.
 news = Blueprint('news', __name__, url_prefix='/api/v2')
 
 
+@news.route('/')
+def hello():
+    return jsonify({"See The Light": "Detect Fake news app"})
 
 @news.route('/detect', methods=['POST'])
 def verify():
