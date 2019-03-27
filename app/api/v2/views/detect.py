@@ -67,15 +67,7 @@ def post_news_link():
     url = request.args.get('url')
 
     # # return jsonify({"The URL you entered is": link})
-    # response = requests.post('http://stl-v2.herokuapp.com/api/v2/detect',
-    #                         data = {"url": link}
-    #                         )
-    # # return (response.content)
-    # # response = requests.post('http://newsbreakers.herokuapp.com',
-    # #                          data={"text": link}
-    # #                          # content_type='application/json'
-    # #                          )
-    # return (response.content)
+    
     try:
         a = Article(url)
         a.download()

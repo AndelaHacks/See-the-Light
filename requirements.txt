@@ -48,6 +48,7 @@ pycparser==2.19
 pydbus==0.6.0
 PyJWT==1.7.1
 pylint==2.2.2
+python-Levenshtein
 pync==2.0.3
 pyOpenSSL==18.0.0
 pytest==4.0.2
