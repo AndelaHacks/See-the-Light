@@ -1,0 +1,31 @@
+sudo: required
+
+dist: xenial
+
+language: python
+
+python:
+  - "3.5"
+
+services: 
+- postgresql
+
+before_script:
+- psql -c "CREATE DATABASE questioner;" -U postgres
+- psql -c "CREATE USER questioner WITH PASSWORD 'password123';" -U postgres
+- python3 manage.py create_tables
+
+script: 
+ - pytest --cov=app/
+ - coveralls
+
+virtualenv:
+  system_site_package: true
+
+install:
+- pip install -r requirements.txt
+- pip install coveralls
+after_success:
+- coveralls
+
+after_script: cd ~
