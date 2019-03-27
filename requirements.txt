@@ -18,7 +18,7 @@ cssselect==1.0.1
 docutils==0.14
 feedfinder2==0.0.4
 feedparser==5.2.1
-Flask==0.12.3
+Flask==0.12.4
 Flask-Bcrypt==0.7.1
 Flask-JWT-Extended==3.14.0
 Flask-Script==2.0.6
