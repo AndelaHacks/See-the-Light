@@ -10,7 +10,7 @@ from re import split as regex_split, sub as regex_sub, UNICODE as REGEX_UNICODE
 from collections import Counter
 from fuzzywuzzy import fuzz, process
 
-#stop words etc from pyteaser
+# stop words etc from pyteaser
 stopWords = set([
     "-", " ", ",", ".", "a", "e", "i", "o", "u", "t", "about", "above",
     "above", "across", "after", "afterwards", "again", "against", "all",
@@ -71,25 +71,27 @@ stopWords = set([
 ])
 ideal = 20.0
 
+
 def apility(url_2):
-    #return the domain part from news link
-    # the check IP address reputation 
-    # 
+    # return the domain part from news link
+    # the check IP address reputation
 
     get_url = (url_2.split('/'))[2]
     IP_addr = socket.gethostbyname(get_url)
     Token_apility = '52a90970-cfa0-4536-91e5-f7148bb25c61'
     headers = {
-        "Accept" : "application/json",
+        "Accept": "application/json",
         "X-Auth-Token": Token_apility
     }
     # request(method, url, body=None, headers={})
-    # Apility API documentation here https://apility.io/apidocs/#get-full-ip-address-reputation-info
+    # Apility API documentation here https://apility.io/apidocs/
+    # get-full-ip-address-reputation-info
     # GET https://api.apility.net/v2.0/ip/<IP>
-    ip_reputation = request.get ('https://api.apility.net/v2.0/ip/' + IP_addr, headers=headers)
-    
+    ip_reputation = request.get('https://api.apility.net/v2.0/ip/' +
+                                IP_addr, headers=headers)
     return ip_reputation.content
-    
+
+
 def summarize(title, text):
     summaries = []
 
@@ -98,30 +100,34 @@ def summarize(title, text):
     titleWords = split_words(title)
 
     if len(sentences) <= 1:
-       return sentences
-
-   #score setences, and use the top 5 sentences
+        return sentences
+    # score setences, and use the top 5 sentences
     ranks = score(sentences, titleWords, keys).most_common(1)
     for rank in ranks:
-       summaries.append(rank[0])
+        summaries.append(rank[0])
 
     return summaries
 
+
 def split_words(text):
-    #split a string into array of words
+    # split a string into array of words
     try:
-        text = regex_sub(r'[^\w ]', '', text, flags=REGEX_UNICODE)  # strip special chars
+        # strip special xtrs
+        text = regex_sub(r'[^\w ]', '', text, flags=REGEX_UNICODE)
         return [x.strip('.').lower() for x in text.split()]
     except TypeError:
         print("Error while splitting characters")
     return None
 
+
 def split_sentences(text):
-    sentences = regex_split(u'(?<![A-ZА-ЯЁ])([.!?]"?)(?=\s+\"?[A-ZА-ЯЁ])', text, flags=REGEX_UNICODE)
+    sentences = regex_split(u'(?<![A-ZА-ЯЁ])([.!?]"?)(?=\s+\"?[A-ZА-ЯЁ])',
+                            text, flags=REGEX_UNICODE)
     s_iter = zip(*[iter(sentences[:-1])] * 2)
-    s_iter = [''.join(map(str,y)).lstrip() for y in s_iter]
+    s_iter = [''.join(map(str, y)).lstrip() for y in s_iter]
     s_iter.append(sentences[-1])
     return s_iter
+
 
 def keywords(text):
     text = split_words(text)
@@ -137,8 +143,9 @@ def keywords(text):
 
     return keywords
 
+
 def score(sentences, titleWords, keywords):
-    #score sentences based on different features
+    # score sentences based on different features
 
     senSize = len(sentences)
     ranks = Counter()
@@ -151,11 +158,12 @@ def score(sentences, titleWords, keywords):
         dbsFeature = dbs(sentence, keywords)
         frequency = (sbsFeature + dbsFeature) / 2.0 * 10.0
 
-        #weighted average of scores from four categories
+        # weighted average of scores from four categories
         totalScore = (titleFeature*1.5 + frequency*2.0 +
                       sentenceLength*1.0 + sentencePosition*1.0) / 4.0
         ranks[s] = totalScore
     return ranks
+
 
 def title_score(title, sentence):
     title = [x for x in title if x not in stopWords]
@@ -169,8 +177,10 @@ def title_score(title, sentence):
 
     return count/len(title)
 
+
 def length_score(sentence):
     return 1 - fabs(ideal - len(sentence)) / ideal
+
 
 def sentence_position(i, size):
 
@@ -198,6 +208,7 @@ def sentence_position(i, size):
     else:
         return 0
 
+
 def sbs(words, keywords):
     score = 0.0
     if len(words) == 0:
@@ -206,6 +217,7 @@ def sbs(words, keywords):
         if word in keywords:
             score += keywords[word]
     return (1.0 / fabs(len(words)) * score)/10.0
+
 
 def dbs(words, keywords):
     if (len(words) == 0):
@@ -230,34 +242,38 @@ def dbs(words, keywords):
     k = len(set(keywords.keys()).intersection(set(words))) + 1
     return (1/(k*(k+1.0))*summ)
 
+
 def sentiment(text):
     blob = TextBlob(text)
-    subjectivity = str(round(blob.sentiment.subjectivity*100,1))
-    polarity = str(round(blob.sentiment.polarity*100,1))
-    return [subjectivity,polarity]
+    subjectivity = str(round(blob.sentiment.subjectivity*100, 1))
+    polarity = str(round(blob.sentiment.polarity*100, 1))
+    return [subjectivity, polarity]
+
+
 def detector(url):
     try:
         a = Article(url)
         a.download()
         a.parse()
-    except: #expression as identifier:
-        return jsonify({"An Error has been detected, unable to scrape article text from,": url})
+    except:  # expression as identifier:
+        return jsonify({"An Error has been detected, unable to scrape article\
+                        text from": url})
     TXT = a.text
     TITLE = a.title
-    use = summarize(TITLE,TXT)
+    use = summarize(TITLE, TXT)
     # lets compare similarity of the Title to Article
-    fuzzy = str(round((100-fuzz.ratio(TITLE,use))*1.0,1))
+    fuzzy = str(round((100-fuzz.ratio(TITLE, use))*1.0, 1))
 
     # unpack and deploy trained count vectorizer
     count_vect = joblib.load('vectorizer.pkl')
     X_train_counts = count_vect.fit_transform([TXT])
     tf_transformer = TfidfTransformer()
     X_train_tfidf = tf_transformer.fit_transform(X_train_counts)
-    
-    # Sentiment analysis is the automated process of 
-    # understanding an opinion about a given subject from written or spoken language
+    # Sentiment analysis is the automated process of
+    # understanding an opinion about a given subject
+    # from written or spoken language
     senti = sentiment(TXT)
-    #unpack and run trained model
+    # unpack and run trained model
     clf = joblib.load('stl_news_model.pkl')
     pred = clf.predict(X_train_tfidf)
     prob = clf.predict_proba(X_train_tfidf)
@@ -266,4 +282,8 @@ def detector(url):
         prob_out = str(round(prob[0][0]*100, 1))
     else:
         prob_out = str(round(prob[0][1]*100, 1))
-    return jsonify({"Prediction": pred_out, "percentage of confidence": prob_out, "subjectivity": senti[0], "polarity": senti[1], "Title / Article Comparison": fuzzy})
+    return jsonify({"Prediction": pred_out,
+                    "percentage of confidence": prob_out,
+                    "subjectivity": senti[0],
+                    "polarity": senti[1],
+                    "Title / Article Comparison": fuzzy})
