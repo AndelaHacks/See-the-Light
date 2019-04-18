@@ -1,5 +1,5 @@
 
-# TEAM SeeTheLight(STL) - ANDELA NEWS HACKATHON
+# TEAM SeeTheLight(STL) - ANGAZA APP
 
 ## Contributors
 [Simon Injiri](https://www.github.com/injiri)<br>
@@ -9,12 +9,24 @@
 
 
 
-The Project consists of a machine learning model that is the backend of our project. The ML model tests and trains it's data using the WebHouse Dataset which we implemented as an API used in the Android app and the front end web plugin.
+The Project consists of a machine learning model that is the backend of our project. When given a link for a news story, it generates a report on the credibility of that article. It does this by using a trained model that is able to detect real of fake news. The logic for this is accessible through an API hosted on Heroku and our different front ends will query this API to return 4 variables i.e. percentage of confidence, whether real or fake, subjectivity and polarity.
 
-The output displays a percentage confidence of real or fake, similarity of text to title, and polarity of the text.
+## Machine Learning Model
+Training the model
+we researched a lot on the methods and processes of detecting fake news and also give credit to various individuals who had done previous works on machine learning to tackle this problem.
+https://www.npr.org/sections/alltechconsidered/2016/12/05/503581220/fake-or-real-how-to-self-check-the-news-and-get-the-facts
+http://www.cs.cmu.edu/~dhdavis/LSFinalProject.pdf 
+Machine learning projects are reliant on finding good datasets. If the dataset is bad, or too small, we cannot make accurate predictions. A collection of labeled fake news and real news (top credible news sources from https://webhose.io/free-datasets/ was used to train a Naive Bayes model to predict probabilities of fake news based on article text. The metrics are subjectivity, polarity, real, fake.
+Machine learning works by finding a relationship between a label (real or fake)  and its features. We do this by showing an object (our model) a bunch of examples from our dataset, the dataset used in this case had about 4000 articles of which 2000 were identified fake articles and 2000 were identified real stories. Each example helps define how each feature affects the label. We refer to this process as training our model.
+Features are independent variables which affect the dependent variable called the label. In this case, we have 2 labels i.e. real and fake that is affected by all the features that denote a story as either real or fake. We used the estimator object from the Scikit-learn library for simple machine learning. Estimators are empty models that create relationships through a predefined algorithm
+
+Algorithms used include
+- Naive Bayes Classifier technique - prior probability that news is real / fake then combine with bayesian measure of likelihood, Finally we classify news as real/fake since its class membership achieves the largest posterior probability for that particular label.
+- Logistic Regression
+- Neural Network (MLPclassifier) - Multi Layer Perceptron (from scikit-learn) - supervised learning algorithm that learns a function f  by training on a dataset
 
 ## IP address/Domain reputation checker
-The STL API queries the Tallos Intelligence Resources and the Public API for Apility.io for much of the analytics in regards to IP and Domain Checker. These three checks -IP address blacklist, Domain blacklist and IP address historical blacklist- are summarized and returned as a global score for the IP address.
+The Angaza API also queries the Tallos Intelligence Resources and the Public API for Apility.io for much of the analytics in regards to IP and Domain Checker. These three checks -IP address blacklist, Domain blacklist and IP address historical blacklist- are summarized and returned as a global score for the IP address.
 
 This API call also returns detailed information about the IP address from different sources:
 - when the domain was registered and the registrar
@@ -34,10 +46,8 @@ After installing the android application, the user will be able to paste the url
 ## Web Plugin 
 It works on the same procedure as the android app but by having a Web Extension being installed in the browser which extacts the webpage being browsed and parses the data using the Machine Learning model API.
 
-## Machine Learning Model
-The See The Light API uses part of the Machine Learning Model developed by [@bmbejcek](https://github.com/bmbejcek). The See The Light app goes ahead and adds dns credibility assessment to check on the source of the story. If such a site is associated with fake news, then it reduces the credibility of such a site.
-
 ## API Endpoints
 The API endpoint to check the authenticity of a news article is:
-[Click Here To View A Demo of the API](https://see-the-light.herokuapp.com/news/get?link=https://stackoverflow.com/questions/24892035/python-flask-how-to-get-parameters-from-a-url)
+[Click Here To View A Demo of the API]
+```(https://stl-v2.herokuapp.com/api/v2/get?url=https://stackoverflow.com/questions/24892035/python-flask-how-to-get-parameters-from-a-url)```
 
