@@ -14,8 +14,8 @@ The Project consists of a machine learning model that is the backend of our proj
 ## Machine Learning Model
 Training the model
 we researched a lot on the methods and processes of detecting fake news and also give credit to various individuals who had done previous works on machine learning to tackle this problem.
-https://www.npr.org/sections/alltechconsidered/2016/12/05/503581220/fake-or-real-how-to-self-check-the-news-and-get-the-facts
-http://www.cs.cmu.edu/~dhdavis/LSFinalProject.pdf 
+- ```https://www.npr.org/sections/alltechconsidered/2016/12/05/503581220/fake-or-real-how-to-self-check-the-news-and-get-the-facts```
+- ```http://www.cs.cmu.edu/~dhdavis/LSFinalProject.pdf```
 Machine learning projects are reliant on finding good datasets. If the dataset is bad, or too small, we cannot make accurate predictions. A collection of labeled fake news and real news (top credible news sources from https://webhose.io/free-datasets/ was used to train a Naive Bayes model to predict probabilities of fake news based on article text. The metrics are subjectivity, polarity, real, fake.
 Machine learning works by finding a relationship between a label (real or fake)  and its features. We do this by showing an object (our model) a bunch of examples from our dataset, the dataset used in this case had about 4000 articles of which 2000 were identified fake articles and 2000 were identified real stories. Each example helps define how each feature affects the label. We refer to this process as training our model.
 Features are independent variables which affect the dependent variable called the label. In this case, we have 2 labels i.e. real and fake that is affected by all the features that denote a story as either real or fake. We used the estimator object from the Scikit-learn library for simple machine learning. Estimators are empty models that create relationships through a predefined algorithm
