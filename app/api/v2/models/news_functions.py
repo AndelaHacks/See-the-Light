@@ -1,4 +1,6 @@
 from flask import request, jsonify
+import requests
+from bs4 import BeautifulSoup
 import socket
 import requests
 from textblob import TextBlob
@@ -90,6 +92,22 @@ def apility(url_2):
     ip_reputation = request.get('https://api.apility.net/v2.0/ip/' +
                                 IP_addr, headers=headers)
     return ip_reputation.content
+
+
+    '''import requests
+
+        url = "https://api.apility.net/v2.0/ip/197.248.149.122"
+
+        headers = {
+            'accept': "application/json",
+            'x-auth-token': "YOUR_API_KEY"
+            }
+
+        response = requests.request("GET", url, headers=headers)
+
+        print(response.text)
+        
+        '''
 
 
 def summarize(title, text):
@@ -255,35 +273,41 @@ def detector(url):
         a = Article(url)
         a.download()
         a.parse()
+        r = request.get(url)
+        page = r.text
+        soup = BeautifulSoup(page, 'lxml')
     except:  # expression as identifier:
         return jsonify({"An Error has been detected, unable to scrape article\
                         text from": url})
     TXT = a.text
     TITLE = a.title
     use = summarize(TITLE, TXT)
+    paras = soup.find_all('p')
     # lets compare similarity of the Title to Article
-    fuzzy = str(round((100-fuzz.ratio(TITLE, use))*1.0, 1))
+    # fuzzy = str(round((100-fuzz.ratio(TITLE, use))*1.0, 1))
 
-    # unpack and deploy trained count vectorizer
-    count_vect = joblib.load('vectorizer.pkl')
-    X_train_counts = count_vect.fit_transform([TXT])
-    tf_transformer = TfidfTransformer()
-    X_train_tfidf = tf_transformer.fit_transform(X_train_counts)
-    # Sentiment analysis is the automated process of
-    # understanding an opinion about a given subject
-    # from written or spoken language
-    senti = sentiment(TXT)
-    # unpack and run trained model
-    clf = joblib.load('stl_news_model.pkl')
-    pred = clf.predict(X_train_tfidf)
-    prob = clf.predict_proba(X_train_tfidf)
-    pred_out = pred[0].decode('utf-8')
-    if prob[0][0] >= .5:
-        prob_out = str(round(prob[0][0]*100, 1))
-    else:
-        prob_out = str(round(prob[0][1]*100, 1))
-    return jsonify({"Prediction": pred_out,
-                    "percentage of confidence": prob_out,
-                    "subjectivity": senti[0],
-                    "polarity": senti[1],
-                    "Title / Article Comparison": fuzzy})
+    # # unpack and deploy trained count vectorizer
+    # count_vect = joblib.load('vectorizer.pkl')
+    # X_train_counts = count_vect.fit_transform([TXT])
+    # tf_transformer = TfidfTransformer()
+    # X_train_tfidf = tf_transformer.fit_transform(X_train_counts)
+    # # Sentiment analysis is the automated process of
+    # # understanding an opinion about a given subject
+    # # from written or spoken language
+    # senti = sentiment(TXT)
+    # # unpack and run trained model
+    # clf = joblib.load('stl_news_model.pkl')
+    # pred = clf.predict(X_train_tfidf)
+    # prob = clf.predict_proba(X_train_tfidf)
+    # pred_out = pred[0].decode('utf-8')
+    # if prob[0][0] >= .5:
+    #     prob_out = str(round(prob[0][0]*100, 1))
+    # else:
+    #     prob_out = str(round(prob[0][1]*100, 1))
+    # return jsonify({"Prediction": pred_out,
+    #                 "percentage of confidence": prob_out,
+    #                 "subjectivity": senti[0],
+    #                 "polarity": senti[1],
+    #                 "Title / Article Comparison": fuzzy})
+    for i, paras in enumerate(paras)
+        return jsonify (paras)

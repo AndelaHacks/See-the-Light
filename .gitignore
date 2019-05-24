@@ -1,6 +1,4 @@
 #ignores by wandesky
-*.vscode/
-*/.vscode
 *restplus-venv/
 
 # Byte-compiled / optimized / DLL files
