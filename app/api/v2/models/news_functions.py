@@ -107,9 +107,9 @@ def apility(url_2):
 
         print(response.text)
         
-        '''
+    '''
 
-
+    
 def summarize(title, text):
     summaries = []
 
@@ -270,18 +270,18 @@ def sentiment(text):
 
 def detector(url):
     try:
-        a = Article(url)
-        a.download()
-        a.parse()
-        r = request.get(url)
+        # a = Article(url)
+        # a.download()
+        # a.parse()
+        r = requests.get(url)
         page = r.text
         soup = BeautifulSoup(page, 'lxml')
     except:  # expression as identifier:
         return jsonify({"An Error has been detected, unable to scrape article\
                         text from": url})
-    TXT = a.text
-    TITLE = a.title
-    use = summarize(TITLE, TXT)
+    # TXT = a.text
+    # TITLE = a.title
+    # use = summarize(TITLE, TXT)
     paras = soup.find_all('p')
     # lets compare similarity of the Title to Article
     # fuzzy = str(round((100-fuzz.ratio(TITLE, use))*1.0, 1))
@@ -309,5 +309,5 @@ def detector(url):
     #                 "subjectivity": senti[0],
     #                 "polarity": senti[1],
     #                 "Title / Article Comparison": fuzzy})
-    for i, paras in enumerate(paras)
+    for i, paras in enumerate(paras):
         return jsonify (paras)
