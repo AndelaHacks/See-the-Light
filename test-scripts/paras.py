@@ -25,7 +25,7 @@ print("Published Date", a.publish_date)
 print (a.text)
 print("***** Summary of the above story ************")
 print(a.summary)
-print("This script took:", round(time.time()- start_time, 2), "seconds to execute")
+print("This script took:", round(time.time() - start_time, 2), "seconds to execute")
 # for i, para in enumerate(paras):
 #     print ('Paragraph', i)
 #     print (para)
