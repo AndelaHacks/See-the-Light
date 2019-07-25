@@ -94,22 +94,6 @@ def apility(url_2):
     return ip_reputation.content
 
 
-    '''import requests
-
-        url = "https://api.apility.net/v2.0/ip/197.248.149.122"
-
-        headers = {
-            'accept': "application/json",
-            'x-auth-token': "YOUR_API_KEY"
-            }
-
-        response = requests.request("GET", url, headers=headers)
-
-        print(response.text)
-        
-    '''
-
-
 def summarize(title, text):
     summaries = []
 

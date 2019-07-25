@@ -29,3 +29,18 @@ print("This script took:", round(time.time() - start_time, 2), "seconds to execu
 # for i, para in enumerate(paras):
 #     print ('Paragraph', i)
 #     print (para)
+def txt2paragraph(filepath):
+    with open(filepath) as f:
+        lines = f.readlines()
+
+    paragraph = ''
+    for line in lines:
+        if line.isspace():  # is it an empty line?
+            if paragraph:
+                yield paragraph
+                paragraph = ''
+            else:
+                continue
+        else:
+            paragraph += ' ' + line.strip()
+    yield paragraph
