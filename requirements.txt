@@ -40,7 +40,7 @@ nltk==3.4
 numpy==1.16.2
 pandas==0.24.1
 pep8==1.7.1
-Pillow==5.4.1
+Pillow==6.2.0
 pluggy==0.8.0
 psycopg2==2.7.6.1
 py==1.7.0
