@@ -9,7 +9,7 @@
 
 
 
-The Project consists of a machine learning model that is the backend of our project. When given a link for a news story, it generates a report on the credibility of that article. It does this by using a trained model that is able to detect real of fake news. The logic for this is accessible through an API hosted on Heroku and our different front ends will query this API to return 4 variables i.e. percentage of confidence, whether real or fake, subjectivity and polarity.
+The Project consists of a machine learning model which  is the backend of our project. When given a link for a news story, it generates a report on the credibility of that article. It does this by using a trained model that is able to detect real of fake news. The logic for this is accessible through an API hosted on Heroku and our different front ends will query this API to return 4 variables i.e. percentage of confidence, whether real or fake, subjectivity and polarity.
 
 ## Machine Learning Model
 Training the model
