@@ -55,7 +55,7 @@ pytest==4.0.2
 pytest-cov==2.6.1
 python-dateutil==2.7.5
 pytz==2018.9
-PyYAML==4.2b1
+PyYAML==5.4
 requests==2.20.0
 requests-file==1.4.3
 s3transfer==0.1.13
