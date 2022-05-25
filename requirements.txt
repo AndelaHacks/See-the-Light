@@ -46,7 +46,7 @@ psycopg2==2.7.6.1
 py==1.7.0
 pycparser==2.19
 pydbus==0.6.0
-PyJWT==1.7.1
+PyJWT==2.4.0
 pylint==2.2.2
 python-Levenshtein
 pync==2.0.3
