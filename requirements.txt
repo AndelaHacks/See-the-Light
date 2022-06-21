@@ -37,7 +37,7 @@ mccabe==0.6.1
 more-itertools==5.0.0
 newspaper3k==0.2.8
 nltk==3.4
-numpy==1.16.2
+numpy==1.22.0
 pandas==0.24.1
 pep8==1.7.1
 Pillow==5.4.1
